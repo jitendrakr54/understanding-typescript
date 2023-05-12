@@ -2,9 +2,31 @@
 
 [Official Link - Basic Types](https://www.typescriptlang.org/docs/handbook/basic-types.html)
 
-### Intro
+---
+
+<p style="text-align: center; font-size: 20px; font-weight: bold"> Using Types </p>
+
+## Core Types
+
+- `number`
+  - 1, 5.3, -10
+  - All numbers, no differentiaton between integers or floats
+- `string`
+  - 'Hi', "Hi", 'Hi'
+  - All text values
+- `boolean`
+  - true, false
+  - Just thesetwo, no "truthy" or "falsy" values
 
 TypeScript does not change the runtime code produced. It super set JS and help prevent problem during development.
+
+TS only helps us during compilation. It doesn't change JavaScript to work differently at runtime, because browsers have
+no built-in Typescript support. It can only help us during development, before we compile our Typescript code to
+JavaScript, but there, it's extremely useful, because it adds an extra step, an extra sanity check.
+
+---
+
+<p style="text-align: center; font-size: 20px; font-weight: bold"> TypeScript Types vs JavaScript Types </p>
 
 ```ts
 function add(n1: number, n2: number) {
@@ -33,6 +55,10 @@ const result = add(number1, number2);
 console.log(result);
 ```
 
+---
+
+<p style="text-align: center; font-size: 20px; font-weight: bold"> Important: Type Casing </p>
+
 In TypeScript, you work with types like `string` or `number`.
 
 **Important**: It is `string` and `number` (etc.), NOT `String`, `Number` (etc.).
@@ -40,7 +66,15 @@ In TypeScript, you work with types like `string` or `number`.
 
 ---
 
-### Type Inference
+<p style="text-align: center; font-size: 20px; font-weight: bold"> Working with Numbers, String & Booleans </p>
+
+Refer app.ts
+
+---
+
+<p style="text-align: center; font-size: 20px; font-weight: bold"> Type Assignment & Type Inference </p>
+
+## Type Inference
 
 TypeScript can **infer** the data type of a variable as we assign values to them. For example, if we assign a value to a `number`, then it **automatically knows that the value is a number** without us telling it explicitly in the code that the variable has the data type number.
 
@@ -51,11 +85,19 @@ let number1 = 5; // Inference, TS detect `number1` store a number
 number1 = '1'; // Type '"1"' is not assignable to type 'number'.
 ```
 
+If you don't initialize variable immediately Then, it's a good practice to tell TypeScript which value will eventually
+be stored in there. So that when you later assign a value to it.
+
+```ts
+let number1: number;
+number = 10;
+```
+
 ---
 
-### QUIZZ
+<p style="text-align: center; font-size: 20px; font-weight: bold"> QUIZZ </p>
 
-#### Understanding Types
+### Understanding Types
 
 ##### 1. Why are "Types" useful and offer an advantage compare to vanilla JavaScript?
 
@@ -85,7 +127,7 @@ const age: number = 29;
 
 ---
 
-### Object Types
+<p style="text-align: center; font-size: 20px; font-weight: bold"> Object Types </p>
 
 ```ts
 const person1 = {
@@ -139,6 +181,10 @@ const person4: {
 console.log(person4);
 ```
 
+---
+
+<p style="text-align: center; font-size: 20px; font-weight: bold"> Nested Object & Types </p>
+
 Let's say you have this JavaScript object:
 
 ```js
@@ -169,7 +215,7 @@ This would be the type of such an object:
 
 ---
 
-### Array Types
+<p style="text-align: center; font-size: 20px; font-weight: bold"> Array Types </p>
 
 ```ts
 let favoriteActivities: string[];
@@ -194,7 +240,7 @@ for (const hobby of person.hobbies) {
 
 ---
 
-### Working with Tuples
+<p style="text-align: center; font-size: 20px; font-weight: bold"> Working with Tuples </p>
 
 Tuples are added by TypeScript = **fixed length array** (AND fixed type).
 
@@ -219,7 +265,10 @@ person.role[1] = 10; // // Shouldn't be allowed
 
 ---
 
-### Working with Enums
+<p style="text-align: center; font-size: 20px; font-weight: bold"> Working with Enums </p>
+
+Global constants you might be working with in your app, which you want to represent as numbers, but to which you want to
+assign a human readable label. And for that, you have the Enum type.
 
 Enums are added by TypeScript. Automatically **enumerated global constant identifiers**.
 
@@ -260,6 +309,8 @@ enum Role {
 }
 ```
 
+You also can assign your own values to all these identifiers, if you need your own numbers.
+
 ```ts
 enum Role {
   ADMIN = 10,
@@ -267,6 +318,8 @@ enum Role {
   AUTHOR = 999,
 }
 ```
+
+You're also not restricted to numbers, you can also go with text here, or even mix it.
 
 ```ts
 enum Role {
@@ -278,13 +331,25 @@ enum Role {
 
 ---
 
-### The "any" Type
+<p style="text-align: center; font-size: 20px; font-weight: bold"> The "any" Type </p>
+
+The any type is the most flexible type you can assign in TypeScript. This type doesn't tell TypeScript anything. It
+basically means you can store any kind of value in there. We got no specific type assignment.
+
+And this can sound great at fist, but actually it's a big disadvantage and you absolutely want to avoid any whenever
+possible. Because any takes away basically all advantages TypeScript gives you. It gives you the same experience you
+have with vanilla JavaScript.
+
+```ts
+let favoriteActivities: any;
+let favoriteActivities: any[];
+```
 
 AVOID `any` type.
 
 ---
 
-### Union Types
+<p style="text-align: center; font-size: 20px; font-weight: bold"> Union Types </p>
 
 ```ts
 function combine(input1: number | string, input2: number | string) {
@@ -306,7 +371,10 @@ console.log(combinedNames);
 
 ---
 
-### Literal Types
+<p style="text-align: center; font-size: 20px; font-weight: bold"> Literal Types </p>
+
+Literal types are types where you don't just say that a certain variable or a parameter should hold, let's say a number
+or a string, but where you are very clear about the exact value it should hold.
 
 ```ts
 function combine(
@@ -336,10 +404,10 @@ console.log(combinedNames);
 
 ---
 
-### Type Aliases & Object Types
+<p style="text-align: center; font-size: 20px; font-weight: bold"> Type Aliases & Custom Types </p>
 
 ```ts
-type Whatever = number; // it works but we should avoir it
+type Whatever = number; // it works but we should avoid it
 type Combinable = number | string; // a new type we're creating based on a union type
 type ConversionDescriptor = 'as-number' | 'as-text'; // a new type we're creating based on a literal type
 
@@ -390,7 +458,7 @@ function isOlder(user: User, checkAge: number) {
 
 ---
 
-### QUIZZ
+<p style="text-align: center; font-size: 20px; font-weight: bold"> QUIZZ </p>
 
 #### Core Types & Concepts
 
@@ -448,7 +516,9 @@ u1 = 'Michael';
 
 ---
 
-### Function Return Types & "void"
+<p style="text-align: center; font-size: 20px; font-weight: bold"> Function Return Types & "void" </p>
+
+The function overall, has one important other type, it has a return type.
 
 ```ts
 // function add(n1: number, n2: number): number
@@ -478,6 +548,12 @@ function printResult(num: number) {
 printResult(add(5, 12));
 ```
 
+In JavaScript, if we use the return value of a function that doesn't return anything, we get undefined as a value. And
+as you probably know, undefined in JavaScript is actually a real value.
+
+The difference between void and undefined, that void is the standard which you'll use in pretty much all scenarios where
+you have a function that does not return a value, and that you can assign it explicitly.
+
 `undefined` is a valid type in TS (but it is not really useful here)
 
 ```ts
@@ -486,20 +562,35 @@ let someValue: undefined;
 
 ---
 
-### Functions as Types
+<p style="text-align: center; font-size: 20px; font-weight: bold"> Functions as Types </p>
 
 ```ts
 // it is valid but combineValues is any and we want to avoid it
 let combineValues;
 combineValues = add;
 combineValues(5, 12);
+combineValues = 5; // Allowed, because combineValues has any type
 ```
+
+`Function` is a type provided by TypeScript in the end, and this makes it clear that whatever we store in here has to be
+a function.
 
 ```ts
 let combineValues: Function;
 combineValues = add;
 combineValues(5, 12);
+// combineValues = 5; //Not allowed
+combineValues = printResult; //Allowed, because printResult is a function
 ```
+
+It would be good if we could be more precise regarding how the function should look like that we want to store in
+'combinevalues.' And that's where function types come in to play.
+
+Function types are types that describe a function regarding the parameters and the return value of that function.
+A function type is created with this arrow function notation you know from JavaScript or at least close to that notation.
+You don't add curly braces here because we aren't creating an arrow function here, we are creating a function type
+instead. Now on the right side of this arrow, you specify the return type of the function you eventually want to be able
+to store in here.
 
 ```ts
 let combineValues: (a: number, b: number) => number;
@@ -512,7 +603,7 @@ combineValues(5, 12);
 
 ---
 
-### Functions Types & Callbacks
+<p style="text-align: center; font-size: 20px; font-weight: bold"> Functions Types & Callbacks </p>
 
 ```ts
 function addAndHandle(n1: number, n2: number, cb: (num: number) => void) {
@@ -527,7 +618,7 @@ addAndHandle(1, 3, (result) => {
 
 ---
 
-### QUIZZ
+<p style="text-align: center; font-size: 20px; font-weight: bold"> QUIZZ </p>
 
 #### Functions & Types
 
@@ -573,7 +664,10 @@ function sayHi(): undefined {
 
 ---
 
-### The "unknown" Type
+<p style="text-align: center; font-size: 20px; font-weight: bold"> The "unknown" Type </p>
+
+Now the interesting thing about the unknown type is we can store any value in there without getting errors, so this is
+all allowed.
 
 ```ts
 let userInput: unknown;
@@ -612,15 +706,19 @@ Using `unknow` is better than `any` because it keep an extra check / some type c
 
 ---
 
-### The "never" Type
+<p style="text-align: center; font-size: 20px; font-weight: bold"> The "never" Type </p>
 
 ```ts
 // Utility function which build error function
 function generateError(message: string, code: number): never {
   throw { message, errorCode: code };
+  // while(true) {}
 }
 
 generateError('An error occured', 500);
 ```
 
 This function above will never returned any value. Only throw an error.
+
+Another function that would never return, by the way, would be a function with an infinite loop. So if we have while
+(true) in there, that creates an infinite loop, and that therefore also would be a function that never returns.
