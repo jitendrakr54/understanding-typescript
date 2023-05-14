@@ -6,7 +6,9 @@
 - [Compiler Config Docs](https://www.typescriptlang.org/docs/handbook/compiler-options.html)
 - [VS Code TS Debugging](https://code.visualstudio.com/docs/typescript/typescript-debugging)
 
-### Using "Watch Mode"
+---
+
+<p style="text-align: center; font-size: 20px; font-weight: bold"> Using "Watch Mode" </p>
 
 Now, each time you want to compile `app.ts` file we do `tsc app.ts`.
 
@@ -14,13 +16,14 @@ Now, each time you want to compile `app.ts` file we do `tsc app.ts`.
 
 ---
 
-### Compiling the Entire Project / Multiple Files
+<p style="text-align: center; font-size: 20px; font-weight: bold"> Compiling the Entire Project / Multiple Files </p>
 
 `tsc --init` in the root of the project. And it creates `tsconfig.json` file.
 
 > Note: if you've installed `typescript` locally on your machine, you can do: `npx tsc --init` to create the `tsconfig.json` file.
 
-As soon as you have set up `tsconfig.json` file, you can run `tsc` and it will compile all your TypeScript files.
+As soon as you have set up `tsconfig.json` file, you can run `tsc` and it will compile all your TypeScript files. and you
+can run `tsc --watch` to compile entire project in watch mode.
 
 ```js
 {
@@ -96,7 +99,10 @@ As soon as you have set up `tsconfig.json` file, you can run `tsc` and it will c
 
 ---
 
-### Including & Excluding Files
+<p style="text-align: center; font-size: 20px; font-weight: bold"> Including & Excluding Files </p>
+
+Now if you add exclude here, that will be an array, and what you can enter here are paths to files which should not be
+included in compilation when you run TSC on the entire project.
 
 ```js
 {
@@ -124,7 +130,7 @@ As soon as you have set up `tsconfig.json` file, you can run `tsc` and it will c
 
 ---
 
-### Setting a Compilation Target
+<p style="text-align: center; font-size: 20px; font-weight: bold"> Setting a Compilation Target </p>
 
 ```js
 {
@@ -139,7 +145,13 @@ As soon as you have set up `tsconfig.json` file, you can run `tsc` and it will c
 
 `"target": "es5",` means all our typescript code is compiled in `es5`, but you could change to (ctrl + space) and let Babel or other to choose how to transpile your JS code.
 
-### Understanding TypeScript Core Libs
+---
+
+<p style="text-align: center; font-size: 20px; font-weight: bold"> Understanding TypeScript Core Libs </p>
+
+`lib` is an option that allow us to specify which default objects and features typescript knows. For example: `dom`, `window`,...
+
+The default objects and features available will depend on your `target`.
 
 ```js
 {
@@ -156,17 +168,43 @@ As soon as you have set up `tsconfig.json` file, you can run `tsc` and it will c
 }
 ```
 
-`lib` is an option that allow us to specify which default objects and features typescript knows. For example: `dom`, `window`,...
+How does TS know that we have such a document, constant or variable available? How does it know that even if we have
+that available that it holds an object which has our querySelector method?
 
-The default objects and features available will depend on your `target`.
+How does it know that button is something which has addEventListener method? How does TypeScript know all of that?
+Now you might say, "Of course it knows." Because in Vanilla JavaScript this would be valid code but keep in mind that
+when you write TypeScript code, you don't necessarily write it for the browser. You could be writing your Node.js
+application with TypeScript and there indeed this would all not work.
+
+So, the reason why this works is this lib option and as you see it's not even set here, but if it isn't set then some
+defaults are assumed. If it's not set the defaults depend on your JavaScript target here, and for es6 it, by default,
+includes all the features that are globally available in es6. For example, the Map object which is available in es6.
+Therefore it wouldn't complain if you use Map.
 
 ---
 
-### Working with Source Maps
+<p style="text-align: center; font-size: 20px; font-weight: bold"> More Configuration & Compilation options </p>
+
+With allowJs and by the way all the way we have checkJs you can always include JavaScript files in the compilation.
+Now with allowJs a JavaScript file will be compiled by type script so even if doesn't end with .ts, type script will
+compile it with checkJs it will not compile it but it will still check the syntax in there and report potentially errors.
+
+```js
+/* JavaScript Support */
+{
+  "allowJs": true,
+  "checkJs": true,
+}
+
+```
+
+<p style="text-align: center; font-size: 20px; font-weight: bold"> Working with Source Maps </p>
 
 `SourceMap` helps us with debugging and development.
 
 The map files generated act as a **bridge** in the modern browsers and the developer tools to connect the JS files to the input TS files. **We can even breakpoint in our TS file.**
+
+With this, we can see TS files as well in sources tab in browser.
 
 ```js
 {
@@ -180,7 +218,7 @@ The map files generated act as a **bridge** in the modern browsers and the devel
 
 ---
 
-### rootDir and outDir
+<p style="text-align: center; font-size: 20px; font-weight: bold"> rootDir and outDir </p>
 
 A good prcatice is to set up a `src` folder with all the TS files (and folders) and a `dist` folder where all the JS file compiled/generated are.
 
@@ -195,11 +233,24 @@ A good prcatice is to set up a `src` folder with all the TS files (and folders) 
 }
 ```
 
+If removeComments set to true then all the cmments will be removed from output js file.
+
+```js
+{
+  "compilerOptions": {
+    //...
+    "removeComments": true
+    //...
+  }
+}
+```
+
 ---
 
-### Stop Emitting Files on Compilation Errors
+<p style="text-align: center; font-size: 20px; font-weight: bold"> Stop Emitting Files on Compilation Errors </p>
 
-`noEmitOnError` prevents code to be compiled if there is an error.
+`noEmitOnError` prevents code to be compiled if there is an error. No output js files are generated if there is
+compilation error.
 
 ```js
 {
@@ -213,7 +264,9 @@ A good prcatice is to set up a `src` folder with all the TS files (and folders) 
 
 ---
 
-### Strict Compilation
+<p style="text-align: center; font-size: 20px; font-weight: bold"> Strict Compilation </p>
+
+If strict is set to true then all other strict type checking is enabled.
 
 ```js
 {
@@ -227,7 +280,7 @@ A good prcatice is to set up a `src` folder with all the TS files (and folders) 
 
 ---
 
-### Code Quality Options
+<p style="text-align: center; font-size: 20px; font-weight: bold"> Code Quality Options </p>
 
 It is a good practice to put keep them at `true` (default value).
 
