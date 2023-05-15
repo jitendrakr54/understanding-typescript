@@ -299,7 +299,7 @@ It is a good practice to put keep them at `true` (default value).
 
 ---
 
-### Debugging with Visual Studio Code
+<p style="text-align: center; font-size: 20px; font-weight: bold"> Debugging with Visual Studio Code </p>
 
 1. Install **Debugger for Chrome** extension.
 2. Go to Debug and create a config file for "Chrome".

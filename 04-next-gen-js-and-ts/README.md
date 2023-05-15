@@ -1,6 +1,8 @@
 # Next-generation JavaScript & TypeScript
 
-### "let" and "const"
+---
+
+<p style="text-align: center; font-size: 20px; font-weight: bold"> "let" and "const" </p>
 
 `let` is "blocked scoped" `{}`!
 
@@ -29,7 +31,7 @@ console.log(isOldWithLet); // it won't work
 
 ---
 
-### Arrow Functions
+<p style="text-align: center; font-size: 20px; font-weight: bold"> Arrow Functions </p>
 
 ```ts
 const add = (a: number, b: number) => {
@@ -42,6 +44,12 @@ const addShort = (a: number, b: number) => a + b;
 
 // When you have only 1 parameter, you can
 
+const printOutput = (output: number | string) => console.log(output);
+
+printOutput(add(5, 2));
+
+// By defining type of printOutput
+
 const printOutput: (a: number | string) => void = (output) =>
   console.log(output);
 
@@ -50,7 +58,7 @@ printOutput(add(5, 2));
 
 ---
 
-### Default Functions Parameters
+<p style="text-align: center; font-size: 20px; font-weight: bold"> Default Functions Parameters </p>
 
 The default arguments should be the last ones.
 
@@ -66,7 +74,7 @@ printOutput(add(5));
 
 ---
 
-### The Spread Operator (...)
+<p style="text-align: center; font-size: 20px; font-weight: bold"> The Spread Operator (...) </p>
 
 ```ts
 const hobbies = ['Sports', 'Cooking'];
@@ -88,7 +96,7 @@ const copiedPersonDeep = { ...person };
 
 ---
 
-### Rest Parameters
+<p style="text-align: center; font-size: 20px; font-weight: bold"> Rest Parameters </p>
 
 ```js
 const add = (...numbers: number[]) => {
@@ -99,18 +107,33 @@ const addedNumbers = add(1, 3, 10, 5.5, 3.7);
 console.log(addedNumbers);
 ```
 
+With below code, you always have to pass an array
+
+```js
+const add = (numbers: number[]) => {
+  return numbers.reduce((acc, num) => acc + num, 0);
+};
+
+const addedNumbers = add([1, 3, 10, 5.5, 3.7]);
+console.log(addedNumbers);
+```
+
 Note: `push` is working in the same way with the rest parameter.
 
 ```ts
 // you could also use for tuple
-const add = (...numbers: number[number, number, number]) => {
+const add = (...numbers: [number, number, number]) => {
   return numbers.reduce((acc, num) => acc + num, 0);
 };
 ```
 
 ---
 
-### Array & Object Destructuring
+<p style="text-align: center; font-size: 20px; font-weight: bold"> Array & Object Destructuring </p>
+
+The important thing here is for array destructuring, elements are pulled out in order because an array is an ordered
+list. In objects, the order is not always guaranteed, and therefore, we don't pull elements out by position, but by key
+name.
 
 ```ts
 const hobbies = ['Sport', 'Cooking'];

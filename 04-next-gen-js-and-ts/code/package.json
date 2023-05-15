@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "typescript project setup",
   "main": "app.ts",
-  "dependencies": {},
+  "dependencies": {
+    "lite-server": "^2.6.1"
+  },
   "devDependencies": {
     "typescript": "^3.9.7"
   },
